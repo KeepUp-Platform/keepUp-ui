@@ -1,0 +1,1 @@
+This repository contains the official frontend application for the KeepUp platform. It is a client-side web application (built with [React/Angular]) that provides the complete user interface (UI) for managing resources. It communicates with the keepup-api to fetch and persist data, allowing users to register, track, and manage their vehicles and other assets.
