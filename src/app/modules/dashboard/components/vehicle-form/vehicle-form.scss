@@ -1,0 +1,113 @@
+.form-container {
+  max-width: 800px; // Que no se estire demasiado en pantallas gigantes
+  margin: 0 auto;
+  position: relative;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 1rem;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-weight: 500;
+  &:hover { color: #1e293b; text-decoration: underline; }
+}
+
+/* Grid System para el formulario */
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  .form-group {
+    flex: 1; // Ocupan el mismo espacio
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+  }
+}
+
+.error-msg {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Radio Buttons Personalizados */
+.radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.radio-option {
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+
+  &:hover { background: #fff; border-color: #94a3b8; }
+  
+  // Cuando el radio dentro está seleccionado (truco CSS moderno :has)
+  &:has(input:checked) {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+  }
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column; // En móvil, todo una columna
+    gap: 0;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+  }
+}

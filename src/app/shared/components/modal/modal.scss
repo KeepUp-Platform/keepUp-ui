@@ -1,0 +1,35 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0; // top, right, bottom, left: 0
+  background: rgba(15, 23, 42, 0.6); // Oscuro semitransparente
+  backdrop-filter: blur(4px); // Efecto vidrio
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 400px;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); // Efecto "pop" suave
+  border: none; // Quitamos el borde del estilo card-panel genérico si interfiere
+  
+  .modal-title { margin-top: 0; color: #1e293b; }
+  .modal-message { color: #64748b; margin-bottom: 2rem; }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    .danger {
+      background-color: #ef4444;
+      &:hover { background-color: #dc2626; }
+    }
+  }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px) scale(0.95); } to { transform: translateY(0) scale(1); } }

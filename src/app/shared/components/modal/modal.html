@@ -1,0 +1,11 @@
+<div class="modal-backdrop" *ngIf="data$ | async as data">
+  <div class="modal-panel card-panel">
+    <h3 class="modal-title">{{ data.title }}</h3>
+    <p class="modal-message">{{ data.message }}</p>
+    
+    <div class="modal-actions">
+      <button class="btn-text" (click)="close()">{{ data.cancelText }}</button>
+      <button class="btn-primary danger" (click)="confirm(data)">{{ data.confirmText }}</button>
+    </div>
+  </div>
+</div>

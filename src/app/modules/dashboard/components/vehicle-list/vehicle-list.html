@@ -1,0 +1,88 @@
+<div class="card-panel">
+  <div class="header-actions">
+    <div>
+      <h2 class="section-title">Mis Vehículos</h2>
+      <p class="text-muted">Gestiona tu flota y mantenimientos</p>
+    </div>
+    <button class="btn-primary" routerLink="new">
+      + Nuevo Vehículo
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando flota...</p>
+  </div>
+
+  <div *ngIf="!isLoading && vehicles.length === 0" class="empty-state">
+    <p>No tienes vehículos registrados aún.</p>
+  </div>
+
+  <div *ngIf="!isLoading && vehicles.length > 0">
+    
+    <div class="desktop-view">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Vehículo</th>
+            <th>Placa</th>
+            <th>Año</th>
+            <th>Tipo</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of vehicles">
+            <td>
+              <div class="vehicle-info">
+                <div class="icon-circle">
+                  <span *ngIf="v.type === 'CAR'">🚗</span>
+                  <span *ngIf="v.type === 'MOTORCYCLE'">🏍️</span>
+                  <span *ngIf="v.type === 'TRUCK'">🚚</span>
+                </div>
+                <div>
+                  <strong>{{ v.brand }}</strong>
+                  <span class="model-text">{{ v.model }}</span>
+                </div>
+              </div>
+            </td>
+            <td><span class="badge-plate">{{ v.plate }}</span></td>
+            <td>{{ v.year }}</td>
+            <td>
+              <span class="badge-type" [class]="v.type.toLowerCase()">
+                {{ v.type }}
+              </span>
+            </td>
+            <td class="text-right">
+              <button class="btn-icon" [routerLink]="['edit', v.id]">✏️</button>
+              <button class="btn-icon danger" (click)="deleteVehicle(v.id)">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mobile-view">
+      <div class="vehicle-card-mobile" *ngFor="let v of vehicles">
+        <div class="card-header-mobile">
+          <div class="vehicle-info">
+             <span class="icon-mobile" *ngIf="v.type === 'CAR'">🚗</span>
+             <span class="icon-mobile" *ngIf="v.type === 'MOTORCYCLE'">🏍️</span>
+             <span class="icon-mobile" *ngIf="v.type === 'TRUCK'">🚚</span>
+             <div>
+               <strong>{{ v.brand }} {{ v.model }}</strong>
+               <div class="subtitle-text">{{ v.year }} • {{ v.color }}</div>
+             </div>
+          </div>
+          <span class="badge-plate">{{ v.plate }}</span>
+        </div>
+        
+        <div class="card-actions-mobile">
+          <button class="btn-outline" [routerLink]="['edit', v.id]">Editar</button>
+          <button class="btn-outline danger" (click)="deleteVehicle(v.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

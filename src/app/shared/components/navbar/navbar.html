@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <span class="logo-text">KeepUp</span>
+  </div>
+
+  <ul class="navbar-nav">
+    <li>
+      <a routerLink="/dashboard/vehicles" routerLinkActive="active">
+        Vehículos
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/documents" routerLinkActive="active">
+        Documentos
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/expenses" routerLinkActive="active">
+        Gastos
+      </a>
+    </li>
+  </ul>
+
+  <div class="navbar-actions">
+    <span class="user-name">Admin</span>
+    <button class="btn-logout" (click)="logout()">
+      Cerrar Sesión
+    </button>
+  </div>
+</nav>

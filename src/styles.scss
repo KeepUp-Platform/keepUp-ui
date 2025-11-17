@@ -1,0 +1,54 @@
+/* Estilos base temporales */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Sistema de Diseño Global --- */
+
+// Estilo de Tarjeta "Soft UI"
+.card-panel {
+  background: #ffffff;
+  border-radius: 16px; // Bordes más redondeados para suavidad
+  padding: 2rem;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+    0 2px 4px -1px rgba(0, 0, 0, 0.03); // Sombra muy sutil
+  border: 1px solid rgba(241, 245, 249, 1); // Borde casi invisible
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  // Efecto hover opcional (para interactividad)
+  &.interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 15px -3px rgba(0, 0, 0, 0.08), 
+      0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Título de sección estándar
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+}
+
+/* --- Responsive Helpers --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem; // Menos padding en móviles
+  }
+  
+  .card-panel {
+    padding: 1.25rem; // Tarjetas más compactas en móviles
+    border-radius: 12px;
+  }
+}

@@ -1,0 +1,68 @@
+<div class="card-panel form-container">
+  <div class="form-header">
+    <h2 class="section-title">{{ isEditing ? 'Editar Vehículo' : 'Nuevo Vehículo' }}</h2>
+    <button class="btn-text" routerLink="/dashboard/vehicles">Cancelar</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <p>Guardando...</p>
+  </div>
+
+  <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label>Marca</label>
+        <input type="text" formControlName="brand" placeholder="Ej. Toyota">
+        <div class="error-msg" *ngIf="vehicleForm.get('brand')?.invalid && vehicleForm.get('brand')?.touched">
+          La marca es obligatoria.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Modelo</label>
+        <input type="text" formControlName="model" placeholder="Ej. Corolla">
+      </div>
+    </div>
+
+    <div class="form-row three-col">
+      <div class="form-group">
+        <label>Año</label>
+        <input type="number" formControlName="year">
+      </div>
+      <div class="form-group">
+        <label>Placa / Patente</label>
+        <input type="text" formControlName="plate" style="text-transform: uppercase;">
+      </div>
+      <div class="form-group">
+        <label>Color</label>
+        <input type="text" formControlName="color">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo de Vehículo</label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" formControlName="type" value="CAR">
+          🚗 Auto
+        </label>
+        <label class="radio-option">
+          <input type="radio" formControlName="type" value="MOTORCYCLE">
+          🏍️ Moto
+        </label>
+        <label class="radio-option">
+          <input type="radio" formControlName="type" value="TRUCK">
+          🚚 Camión
+        </label>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        {{ isEditing ? 'Guardar Cambios' : 'Registrar Vehículo' }}
+      </button>
+    </div>
+
+  </form>
+</div>
