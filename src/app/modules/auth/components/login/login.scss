@@ -6,7 +6,7 @@ $bg-color: #f1f5f9;      // Slate 100
 
 :host {
   display: block;
-  height: 100vh; // Ocupa toda la pantalla
+  height: 100vh;
 }
 
 .login-container {
@@ -14,12 +14,12 @@ $bg-color: #f1f5f9;      // Slate 100
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: $primary-color; // Fondo oscuro elegante
-  background: linear-gradient(135deg, $primary-color 0%, #0f172a 100%);
+  background-color: $primary-color;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
 }
 
 .login-card {
-  background: white;
+  background: var(--white, #fff);
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -112,10 +112,11 @@ $bg-color: #f1f5f9;      // Slate 100
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
-    opacity: 1;
+    opacity: 3;
     transform: translateY(0);
   }
 }
+
