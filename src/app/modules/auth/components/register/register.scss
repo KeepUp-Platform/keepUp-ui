@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem; // Padding para móviles
+  
+  // Fondo R5 Style (Mismo que Login para consistencia)
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 450px; // Un poco más ancho que el login
+  // Hereda .card-panel de styles.scss global (fondo blanco, sombra, bordes)
+  
+  .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .brand-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark); // Variable global
+      margin: 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      color: var(--text-muted); // Variable global
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-sizing: border-box; // Vital para evitar desbordes
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    &.invalid {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+    }
+  }
+}
+
+.error-msg {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 1rem;
+  // Hereda estilos globales btn-primary
+}
+
+.register-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1.5rem;
+
+  a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    
+    &:hover { text-decoration: underline; }
+  }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }

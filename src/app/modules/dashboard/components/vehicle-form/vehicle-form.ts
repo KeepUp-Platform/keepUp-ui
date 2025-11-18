@@ -29,7 +29,7 @@ export class VehicleForm implements OnInit {
       brand: ['', [Validators.required]],
       model: ['', [Validators.required]],
       year: [new Date().getFullYear(), [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear() + 1)]],
-      plate: ['', [Validators.required, Validators.pattern('^[A-Z0-9-]+$')]], // Solo mayúsculas y números
+      plate: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-]+$')]], // Solo mayúsculas y números
       color: [''],
       type: ['CAR', [Validators.required]]
     });

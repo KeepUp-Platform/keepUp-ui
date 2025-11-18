@@ -1,59 +1,66 @@
-# KeepUpUi
+This repository contains the official frontend application for the KeepUp platform. It is a client-side web application (built with [Angular]) that provides the complete user interface (UI) for managing resources. It communicates with the keepup-api to fetch and persist data, allowing users to register, track, and manage their vehicles and other assets.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+keepup-ui/
+├── .github/
+│   └── pull_request_template.md
+│
+├── src/
+│   ├── app/
+│   │   ├── core/                               # Servicios globales, guards, interceptores
+│   │   │   ├── guards/
+│   │   │   │   └── auth.guard.ts
+│   │   │   ├── interceptors/
+│   │   │   │   └── jwt.interceptor.ts
+│   │   │   └── services/
+│   │   │       └── local-storage.service.ts
+│   │   │
+│   │   ├── modules/                            # Feature Modules (Lazy Loaded)
+│   │   │   ├── auth/                           # Módulo de Autenticación – SPRINT 1
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── login/
+│   │   │   │   │   │   └── login.component.ts
+│   │   │   │   │   └── register/
+│   │   │   │   │       └── register.component.ts
+│   │   │   │   ├── services/
+│   │   │   │   │   └── auth.service.ts
+│   │   │   │   ├── auth-routing.module.ts
+│   │   │   │   └── auth.module.ts
+│   │   │
+│   │   │   └── dashboard/                      # Módulo principal post-login – SPRINT 1 y 2
+│   │   │       ├── components/
+│   │   │       │   ├── vehicle-list/
+│   │   │       │   ├── vehicle-form/
+│   │   │       │   ├── document-list/
+│   │   │       │   └── expense-list/
+│   │   │       ├── services/
+│   │   │       │   ├── vehicle.service.ts
+│   │   │       │   ├── document.service.ts
+│   │   │       │   └── expense.service.ts
+│   │   │       ├── dashboard-routing.module.ts
+│   │   │       └── dashboard.module.ts
+│   │   │
+│   │   ├── shared/                             # Componentes y pipes reusables
+│   │   │   ├── components/
+│   │   │   │   ├── navbar/
+│   │   │   │   │   └── navbar.component.ts
+│   │   │   │   ├── alert-bell/
+│   │   │   │   │   └── alert-bell.component.ts
+│   │   │   │   └── modal/
+│   │   │   │       └── modal.component.ts
+│   │   │   ├── pipes/
+│   │   │   └── shared.module.ts
+│   │   │
+│   │   ├── app-routing.module.ts               # Rutas principales
+│   │   ├── app.component.html                  # <router-outlet></router-outlet>
+│   │   ├── app.component.ts
+│   │   └── app.module.ts                       # Módulo raíz
+│   │
+│   ├── assets/                                 # Imágenes, iconos, data .json
+│   └── environments/                           # Variables de entorno (APIs)
+│       ├── environment.ts
+│       └── environment.prod.ts
+│
+├── angular.json
+└── package.json
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

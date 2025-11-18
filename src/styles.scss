@@ -1,7 +1,23 @@
-/* Estilos base temporales */
+/* =========================================
+   THEME: R5 Corporate Style
+   ========================================= */
+:root {
+  /* Paleta de Colores R5-Inspired */
+  --primary-dark: #0f172a;   /* Azul Oscuro Profundo (Navy) - Para Navbars y Textos */
+  --primary-blue: #2563eb;   /* Azul Brillante - Para acciones principales */
+  --accent-green: #10b981;   /* Verde Éxito - Para confirmaciones */
+  --bg-light: #f8fafc;       /* Fondo Gris Muy Claro */
+  --text-main: #1e293b;      /* Color de texto principal */
+  --text-muted: #64748b;     /* Color de texto secundario */
+  --white: #ffffff;
+}
+
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -10,45 +26,73 @@ body {
   padding: 20px;
 }
 
-/* --- Sistema de Diseño Global --- */
-
-// Estilo de Tarjeta "Soft UI"
+/* --- Tarjetas (Cards) --- */
 .card-panel {
-  background: #ffffff;
-  border-radius: 16px; // Bordes más redondeados para suavidad
+  background: var(--white);
+  border-radius: 12px; /* Bordes suaves pero profesionales */
   padding: 2rem;
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-    0 2px 4px -1px rgba(0, 0, 0, 0.03); // Sombra muy sutil
-  border: 1px solid rgba(241, 245, 249, 1); // Borde casi invisible
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  // Efecto hover opcional (para interactividad)
-  &.interactive:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 10px 15px -3px rgba(0, 0, 0, 0.08), 
-      0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  }
 }
 
-// Título de sección estándar
+/* --- Títulos --- */
 .section-title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
   letter-spacing: -0.025em;
 }
 
-/* --- Responsive Helpers --- */
+/* --- Botones Estilo R5 --- */
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px; /* Radio moderno */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8; /* Azul un poco más oscuro */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: var(--text-main);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  background-color: #eff6ff;
+}
+
+/* --- Helpers --- */
+.text-muted { color: var(--text-muted); }
+
+/* Responsive */
 @media (max-width: 768px) {
-  .container {
-    padding: 1rem; // Menos padding en móviles
-  }
-  
-  .card-panel {
-    padding: 1.25rem; // Tarjetas más compactas en móviles
-    border-radius: 12px;
-  }
+  .container { padding: 1rem; }
+  .card-panel { padding: 1.25rem; }
 }

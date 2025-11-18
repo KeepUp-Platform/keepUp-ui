@@ -1,29 +1,31 @@
-$primary-color: #1e293b; 
-$accent-color: #3b82f6;  
-$text-color: #f8fafc;    
-$hover-bg: rgba(255, 255, 255, 0.1);
-
 :host {
   display: block;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $primary-color;
-  color: $text-color;
+  background-color: var(--primary-dark, #0f172a); /* Usa la variable global o fallback */
+  color: white;
   padding: 0.75rem 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 
   .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
     
     .logo-text {
-      background: linear-gradient(45deg, $accent-color, #60a5fa);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: white;
+      /* Efecto sutil en el logo */
+      background: linear-gradient(90deg, #fff, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -32,26 +34,26 @@ $hover-bg: rgba(255, 255, 255, 0.1);
   .navbar-nav {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     margin: 0;
     padding: 0;
 
     a {
       text-decoration: none;
-      color: darken($text-color, 20%);
+      color: #94a3b8; /* Gris azulado claro */
       font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      font-size: 0.95rem;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
 
       &:hover {
-        color: $text-color;
-        background-color: $hover-bg;
+        color: white;
       }
 
       &.active {
-        color: $accent-color;
-        background-color: rgba($accent-color, 0.1);
+        color: white;
+        border-bottom-color: var(--primary-blue, #2563eb); /* Línea azul brillante debajo */
       }
     }
   }
@@ -59,39 +61,50 @@ $hover-bg: rgba(255, 255, 255, 0.1);
   .navbar-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 
     .user-name {
       font-size: 0.9rem;
-      color: darken($text-color, 30%);
+      color: #e2e8f0;
+      font-weight: 500;
     }
 
     .btn-logout {
-      background-color: transparent;
-      border: 1px solid darken($text-color, 40%);
-      color: $text-color;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 0.85rem;
       transition: all 0.2s;
 
       &:hover {
-        border-color: #ef4444;
-        color: #ef4444;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-color: white;
       }
     }
   }
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
+    padding: 1rem;
     gap: 1rem;
     
     .navbar-nav {
+      gap: 1.5rem;
       width: 100%;
       justify-content: center;
+    }
+    
+    .navbar-actions {
+      width: 100%;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1rem;
     }
   }
 }
