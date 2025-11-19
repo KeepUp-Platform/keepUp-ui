@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; // Cliente HTTP real
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment.development'; // Tu URL
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 import { User } from '../../../core/models/user';
 
+// Interfaces para tipado estricto
 interface AuthResponse {
   token: string;
+}
+
+interface LoginRequest {
+  email: string;
+  password: string;
 }
 
 @Injectable({
@@ -14,25 +20,23 @@ interface AuthResponse {
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/auth`; // http://localhost:8080/api/auth
+  private apiUrl = `${environment.apiUrl}/auth`;
 
   constructor(private http: HttpClient) { }
 
-  // Método Register
   register(userData: User): Observable<boolean> {
     const requestPayload = {
-      name: userData.fullName, // Backend espera 'name'
+      name: userData.fullName,
       email: userData.email,
       password: userData.password
     };
 
-    // 2. Petición HTTP POST
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, requestPayload)
       .pipe(
         map(response => {
-          // Si el backend responde con token, el registro fue exitoso
           if (response && response.token) {
-            console.log('Registro exitoso, token recibido:', response.token);
+            // Opcional: Auto-login al registrarse
+            // localStorage.setItem('token', response.token);
             return true;
           }
           return false;
@@ -40,15 +44,35 @@ export class AuthService {
       );
   }
 
-  // Dejamos el login mockeado hasta que el backend lo termine
-  login(credentials: any): Observable<any> {
-    console.warn('⚠️ Login aún en modo MOCK. Esperando endpoint del backend.');
-    // ... tu código mock anterior ...
-    return new Observable(observer => {
-        setTimeout(() => {
-            observer.next({ token: 'fake-jwt' });
-            observer.complete();
-        }, 1000);
-    });
+  login(credentials: LoginRequest): Observable<boolean> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials)
+      .pipe(
+        map(response => {
+          // Si el backend devuelve un token, el login es exitoso
+          if (response && response.token) {
+            console.log('Login exitoso. Guardando token...');
+            // [CLAVE] Guardamos el token. Esto activa el AuthGuard y el Interceptor automáticamente
+            localStorage.setItem('token', response.token);
+            return true;
+          }
+          return false;
+        }),
+        catchError(error => {
+          console.error('Error en login:', error);
+          throw error;
+        })
+      );
+  }
+
+  // 3. Logout
+  logout(): void {
+    localStorage.removeItem('token');
+    // Aquí podrías redirigir al login si inyectaras el Router, 
+    // pero es mejor hacerlo desde el componente que llama a logout.
+  }
+  
+  // Helper para saber si está logueado (útil para ocultar/mostrar menús)
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 }
