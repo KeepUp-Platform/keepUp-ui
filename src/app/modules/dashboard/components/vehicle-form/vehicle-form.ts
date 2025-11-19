@@ -70,19 +70,18 @@ export class VehicleForm implements OnInit {
     const formData = this.vehicleForm.value;
 
     if (this.isEditing && this.currentId) {
-      // LOGICA DE ACTUALIZAR
-      const updatedVehicle = { ...formData, id: this.currentId };
-      this.vehicleService.updateVehicle(updatedVehicle).subscribe(() => {
-        this.isLoading = false;
-        this.router.navigate(['/dashboard/vehicles']);
-      });
-    } else {
-      // LOGICA DE CREAR
-      this.vehicleService.createVehicle(formData).subscribe(() => {
-        this.isLoading = false;
-        this.alertService.success('¡Vehículo registrado con éxito!'); // Toast éxito
-        this.router.navigate(['/dashboard/vehicles']);
-      });
-    }
+    const updatedVehicle = { ...formData, id: this.currentId };
+    this.vehicleService.updateVehicle(updatedVehicle).subscribe(() => {
+      this.isLoading = false;
+      this.alertService.success('¡Vehículo actualizado correctamente!');
+      this.router.navigate(['/dashboard/vehicles']);
+    });
+  } else {
+    this.vehicleService.createVehicle(formData).subscribe(() => {
+      this.isLoading = false;
+      this.alertService.success('¡Vehículo registrado con éxito!');
+      this.router.navigate(['/dashboard/vehicles']);
+    });
   }
+}
 }
