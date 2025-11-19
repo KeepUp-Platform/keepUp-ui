@@ -1,11 +1,12 @@
 import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptors } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing-module';
-import { HttpClientModule } from '@angular/common/http';
 import { App } from './app';
 import { SharedModule } from './shared-module';
+import { jwtInterceptor } from './core/interceptors/jwt-interceptor';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,12 @@ import { SharedModule } from './shared-module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule,
-    HttpClientModule
+    SharedModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+    provideHttpClient(withInterceptors([jwtInterceptor])) 
   ],
   bootstrap: [App]
 })
