@@ -13,8 +13,8 @@
     <div class="form-row">
       <div class="form-group">
         <label>Marca</label>
-        <input type="text" formControlName="brand" placeholder="Ej. Toyota">
-        <div class="error-msg" *ngIf="vehicleForm.get('brand')?.invalid && vehicleForm.get('brand')?.touched">
+        <input type="text" formControlName="make" placeholder="Ej. Toyota">
+        <div class="error-msg" *ngIf="vehicleForm.get('make')?.invalid && vehicleForm.get('make')?.touched">
           La marca es obligatoria.
         </div>
       </div>
@@ -32,7 +32,10 @@
       </div>
       <div class="form-group">
         <label>Placa / Patente</label>
-        <input type="text" formControlName="plate" style="text-transform: uppercase;">
+        <input type="text" formControlName="licensePlate" style="text-transform: uppercase;">
+        <div class="error-msg" *ngIf="vehicleForm.get('licensePlate')?.invalid && vehicleForm.get('licensePlate')?.touched">
+          Placa inválida.
+        </div>
       </div>
       <div class="form-group">
         <label>Color</label>
@@ -43,18 +46,23 @@
     <div class="form-group">
       <label>Tipo de Vehículo</label>
       <div class="radio-group">
-        <label class="radio-option">
-          <input type="radio" formControlName="type" value="CAR">
-          🚗 Auto
+        
+        <label 
+          *ngFor="let option of vehicleOptions" 
+          class="radio-option"
+          [class.selected]="vehicleForm.get('vehicleType')?.value === option.value"
+        >
+          <input 
+            type="radio" 
+            formControlName="vehicleType" 
+            [value]="option.value"
+          >
+          {{ option.icon }} {{ option.label }}
         </label>
-        <label class="radio-option">
-          <input type="radio" formControlName="type" value="MOTORCYCLE">
-          🏍️ Moto
-        </label>
-        <label class="radio-option">
-          <input type="radio" formControlName="type" value="TRUCK">
-          🚚 Camión
-        </label>
+
+      </div>
+       <div class="error-msg" *ngIf="vehicleForm.get('vehicleType')?.invalid && vehicleForm.get('vehicleType')?.touched">
+        Selecciona un tipo.
       </div>
     </div>
 
