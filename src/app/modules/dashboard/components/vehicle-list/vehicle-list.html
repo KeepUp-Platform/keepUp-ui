@@ -27,7 +27,7 @@
             <th>Vehículo</th>
             <th>Placa</th>
             <th>Año</th>
-            <th>Tipo</th>
+            <th>Color</th>
             <th class="text-right">Acciones</th>
           </tr>
         </thead>
@@ -36,26 +36,24 @@
             <td>
               <div class="vehicle-info">
                 <div class="icon-circle">
-                  <span *ngIf="v.type === 'CAR'">🚗</span>
-                  <span *ngIf="v.type === 'MOTORCYCLE'">🏍️</span>
-                  <span *ngIf="v.type === 'TRUCK'">🚚</span>
+                  <span *ngIf="v.vehicleType === 'CAR'">🚗</span>
+                  <span *ngIf="v.vehicleType === 'MOTORCYCLE'">🏍️</span>
+                  <span *ngIf="v.vehicleType === 'TRUCK'">🚚</span>
+                  <span *ngIf="v.vehicleType === 'PUBLIC_TRANSPORT'">🚕</span>
+                  <span *ngIf="v.vehicleType === 'OTHER'">🚜</span>
                 </div>
                 <div>
-                  <strong>{{ v.brand }}</strong>
+                  <strong>{{ v.make }}</strong>
                   <span class="model-text">{{ v.model }}</span>
                 </div>
               </div>
             </td>
-            <td><span class="badge-plate">{{ v.plate }}</span></td>
+            <td><span class="badge-plate">{{ v.licensePlate }}</span></td>
             <td>{{ v.year }}</td>
-            <td>
-              <span class="badge-type" [class]="v.type.toLowerCase()">
-                {{ v.type }}
-              </span>
-            </td>
+            <td>{{ v.color }}</td>
             <td class="text-right">
               <button class="btn-icon" [routerLink]="['edit', v.id]">✏️</button>
-              <button class="btn-icon danger" (click)="deleteVehicle(v.id)">🗑️</button>
+              <button class="btn-icon danger" (click)="deleteVehicle(v.id!)">🗑️</button>
             </td>
           </tr>
         </tbody>
@@ -66,23 +64,26 @@
       <div class="vehicle-card-mobile" *ngFor="let v of vehicles">
         <div class="card-header-mobile">
           <div class="vehicle-info">
-             <span class="icon-mobile" *ngIf="v.type === 'CAR'">🚗</span>
-             <span class="icon-mobile" *ngIf="v.type === 'MOTORCYCLE'">🏍️</span>
-             <span class="icon-mobile" *ngIf="v.type === 'TRUCK'">🚚</span>
+             <div class="icon-circle">
+                <span *ngIf="v.vehicleType === 'CAR'">🚗</span>
+                <span *ngIf="v.vehicleType === 'MOTORCYCLE'">🏍️</span>
+                <span *ngIf="v.vehicleType === 'TRUCK'">🚚</span>
+                <span *ngIf="v.vehicleType === 'PUBLIC_TRANSPORT'">🚕</span>
+                <span *ngIf="v.vehicleType === 'OTHER'">🚜</span>
+              </div>
              <div>
-               <strong>{{ v.brand }} {{ v.model }}</strong>
+               <strong>{{ v.make }} {{ v.model }}</strong>
                <div class="subtitle-text">{{ v.year }} • {{ v.color }}</div>
              </div>
           </div>
-          <span class="badge-plate">{{ v.plate }}</span>
+          <span class="badge-plate">{{ v.licensePlate }}</span>
         </div>
         
         <div class="card-actions-mobile">
           <button class="btn-outline" [routerLink]="['edit', v.id]">Editar</button>
-          <button class="btn-outline danger" (click)="deleteVehicle(v.id)">Eliminar</button>
+          <button class="btn-outline danger" (click)="deleteVehicle(v.id!)">Eliminar</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>

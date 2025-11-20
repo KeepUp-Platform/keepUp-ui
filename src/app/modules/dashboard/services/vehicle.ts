@@ -1,79 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { Vehicle } from '../../../core/models/vehicle'; // Asegúrate que esta ruta sea correcta
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment.development';
+import { Vehicle } from '../../../core/models/vehicle';
 
 @Injectable({
   providedIn: 'root',
 })
-export class VehicleService { // <--- ¡IMPORTANTE: El nombre debe ser VehicleService!
+export class VehicleService {
 
-  // Datos simulados (MOCK DATA)
-  private mockVehicles: Vehicle[] = [
-    {
-      id: 1,
-      brand: 'Tesla',
-      model: 'Model Y',
-      year: 2023,
-      plate: 'ABC-123',
-      color: 'Blanco Perla',
-      type: 'CAR',
-      imageUrl: 'https://placehold.co/100x60'
-    },
-    {
-      id: 2,
-      brand: 'Yamaha',
-      model: 'MT-07',
-      year: 2021,
-      plate: 'MOTO-99',
-      color: 'Negro Mate',
-      type: 'MOTORCYCLE',
-      imageUrl: 'https://placehold.co/100x60'
-    },
-    {
-      id: 3,
-      brand: 'Ford',
-      model: 'Raptor F-150',
-      year: 2024,
-      plate: 'TRK-555',
-      color: 'Azul Eléctrico',
-      type: 'TRUCK',
-      imageUrl: 'https://placehold.co/100x60'
-    }
-  ];
+  // URL del backend: http://localhost:8080/api/v1/vehicles
+  private apiUrl = `${environment.apiUrl}/v1/vehicles`;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  // Método para obtener los datos
   getVehicles(): Observable<Vehicle[]> {
-    // Simula una espera de 0.8 segundos como si viniera de internet
-    return of(this.mockVehicles).pipe(delay(800));
+    return this.http.get<Vehicle[]>(this.apiUrl);
   }
 
-  deleteVehicle(id: number): Observable<boolean> {
-    return of(true).pipe(delay(500));
+  getVehicleById(id: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.apiUrl}/${id}`);
   }
 
-  getVehicleById(id: number): Observable<Vehicle | undefined> {
-    const vehicle = this.mockVehicles.find(v => v.id === id);
-    return of(vehicle).pipe(delay(600)); // Simula latencia
-  }
-
-  // Crear nuevo
   createVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    // Generamos un ID falso
-    const newId = this.mockVehicles.length > 0 ? Math.max(...this.mockVehicles.map(v => v.id)) + 1 : 1;
-    const newVehicle = { ...vehicle, id: newId };
-    this.mockVehicles.push(newVehicle);
-    return of(newVehicle).pipe(delay(800));
+    const payload = { ...vehicle, userId: 1 }; 
+    return this.http.post<Vehicle>(this.apiUrl, payload);
   }
 
-  // Actualizar existente
   updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
-    const index = this.mockVehicles.findIndex(v => v.id === vehicle.id);
-    if (index !== -1) {
-      this.mockVehicles[index] = vehicle;
-    }
-    return of(vehicle).pipe(delay(800));
+    const payload = { ...vehicle, userId: 1 };
+    return this.http.put<Vehicle>(`${this.apiUrl}/${vehicle.id}`, payload);
+  }
+
+  deleteVehicle(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
